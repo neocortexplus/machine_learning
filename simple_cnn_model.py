@@ -11,9 +11,9 @@ import torch.nn.functional as F
 from torch.autograd import Variable
 import torch, torchvision
 from torchvision import models
-
-
 import sys
+
+
 print(sys.version)
 
 
