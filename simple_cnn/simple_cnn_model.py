@@ -2,16 +2,15 @@ import torch
 import torch.nn as nn
 from torchvision import datasets                                                                                         #for reading from the dataset
 from torch.utils.data import DataLoader
-import torchvision.datasets as datasets                                                                                #torchvision has the CIFAR10 dataset
 import torchvision.transforms as transforms
 import matplotlib.pyplot as plt
 import  torch.optim as optim                                                                                                # for optimizer
-import torchvision.transforms as transforms
 import torch.nn.functional as F
 from torch.autograd import Variable
 import torch, torchvision
 from torchvision import models
 import sys
+
 
 
 print(sys.version)
