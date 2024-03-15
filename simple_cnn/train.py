@@ -11,18 +11,33 @@ class Trainer:
         self.momentum = momentum
         
         # Initialize criterion
-        if criterion == 'CrossEntropyLoss':
-            self.criterion = nn.CrossEntropyLoss()
-        # Add more conditions here for other loss functions as needed
+        self.criterion = self._init_criterion(criterion)
         
         # Initialize optimizer
+        self.optimizer = self._init_optimizer(optimizer)
+
+    def _init_criterion(self, criterion):
+        if criterion == 'CrossEntropyLoss':
+            return nn.CrossEntropyLoss()
+        elif criterion == 'MSELoss':
+            return nn.MSELoss()
+        elif criterion == 'NLLLoss':
+            return nn.NLLLoss()
+        # Add more loss functions as needed
+        else:
+            raise ValueError(f"Unsupported loss function: {criterion}")
+
+    def _init_optimizer(self, optimizer):
         if optimizer == 'SGD':
-            self.optimizer = optim.SGD(model.parameters(), lr=learning_rate, momentum=momentum)
+            return optim.SGD(self.model.parameters(), lr=self.learning_rate, momentum=self.momentum)
         elif optimizer == 'Adam':
-            self.optimizer = optim.Adam(model.parameters(), lr=learning_rate)
-        # Add more conditions here for other optimizers as needed
+            return optim.Adam(self.model.parameters(), lr=self.learning_rate)
+        # Add more optimizers as needed
+        else:
+            raise ValueError(f"Unsupported optimizer: {optimizer}")
 
     def train(self, epochs):
+        self.model.to(self.device)
         self.model.train()
         for epoch in range(epochs):
             total_loss = 0
